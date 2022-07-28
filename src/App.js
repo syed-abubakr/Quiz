@@ -1,15 +1,46 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Header from "./components/Header";
-import Login from "./components/Login";
+import Signin from "./components/Signin";
+import { useState } from "react";
 
-let login = false;
+export let login = false;
+
 
 function App() {
-  localStorage.setItem("email", "1@gmail.com");
-  localStorage.setItem("pass", "pass");
-  if (!login) {
-    return <Login />;
+
+  const admin = {
+    email : "admin@gmail.com",
+    password :"1234"
+  }
+
+  const [user, setUser] = useState({email: "", password: ""});
+  const [error, setError] = useState("");
+
+  const Login = details => {
+    console.log(details);
+
+    if(details.email == admin.email && details.password == admin.password){
+      console.log("logged in");
+      setUser({
+        email: details.email,
+        password: details.password
+      });
+      console.log(user.email, ' ', user.password);
+    }
+    else{
+      console.log("Incorrect details");
+      alert("Incorrect details");
+    }
+  }
+
+  const Logout = () =>{
+    console.log("Logout");
+  }
+
+  if (user.email==="") {
+    return (
+      <Signin Login={Login} error = {error}/>
+    );
   } else {
     return (
       <>
@@ -21,9 +52,5 @@ function App() {
   }
 }
 
-function unlock(){
-  // if()
-  login=true;
-}
 
 export default App;
