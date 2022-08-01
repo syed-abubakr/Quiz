@@ -2,6 +2,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Signin from "./components/Signin";
 import { useState } from "react";
+import Quiz from "./components/Quiz";
 
 export let login = false;
 
@@ -44,9 +45,9 @@ function App() {
   } else {
     return (
       <>
-        <Header />
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
-        <p>Hello</p>
+        {/* <Header /> */}
+        <Quiz/>
+
       </>
     );
   }
