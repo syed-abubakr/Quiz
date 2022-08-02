@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 
 export default function Quiz() {
   const questions = [
@@ -46,20 +47,34 @@ export default function Quiz() {
         { answerText: "Texas", isCorrect: false },
         { answerText: "Florida", isCorrect: false },
       ],
-    }
+    },
   ];
 
   const [currentQ, setCurrentQ] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
+  const [seconds, setSeconds] = useState(30);
+
+  let time;
+  useEffect(() => {
+    time = setInterval(() => {
+      setSeconds(seconds - 1);
+      if (seconds == 0) {
+        setSeconds(30);
+        answerHandler(false);
+      }
+    }, 1000);
+    return () => {
+      clearInterval(time);
+    };
+  });
 
   const answerHandler = (isCorrect) => {
     if (isCorrect) {
-      //   alert("Correct");
       setScore(score + 1);
+      setSeconds(30);
     }
     const nextQ = currentQ + 1;
-    // console.log(nextQ," ",questions.length)
     if (nextQ < questions.length) {
       setCurrentQ(nextQ);
     } else {
@@ -67,38 +82,47 @@ export default function Quiz() {
     }
   };
 
-  // "bg-red-500 min-h-200 w-400 rounded-15px flex-auto justify-evenly h-min p-20px border-15"
-  // grid h-screen place-items-center
   return (
-    <div className="grid h-screen place-items-center">
-      <div className="bg-[#283153] w-1/2 p-10 rounded-lg min-h-1/2">
-        {showScore ? (
-          <div className="score-section text-white">
-            You scored {score} out of {questions.length}
-          </div>
-        ) : (
-          <>
-            <div className="question-section">
-              <div className="text-white text-3xl mb-2">
-                <span>Question {currentQ + 1}</span>/{questions.length}
-              </div>
-              <div className="text-white text-lg">
-                {questions[currentQ].questionText}
-              </div>
+    <>
+      <div className="grid h-screen place-items-center">
+        <div className="bg-[#283153] w-1/2 p-10 rounded-lg min-h-1/2">
+          {showScore ? (
+            <div className="score-section text-white">
+              You scored {score} out of {questions.length}
             </div>
-            <div className="answer-section">
-              {questions[currentQ].answerOptions.map((answerOption) => (
-                <button
-                  className="bg-white p-5 rounded-lg m-5 w-full hover:grey flex hover:bg-[#56487b] hover:text-white"
-                  onClick={() => answerHandler(answerOption.isCorrect)}
-                >
-                  {answerOption.answerText}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+          ) : (
+            <>
+              <div className="text-md bg-slate-600 w-[200px] rounded-lg p-5px h-20 grid place-items-center text-white text-center absolute top-0 right-0 m-1">
+                <h1>
+                  Time remaining:
+                  <br />
+                  00:
+                  {seconds < 10 ? "0" + seconds : seconds}
+                </h1>
+              </div>
+
+              <div className="question-section">
+                <div className="text-white text-3xl mb-2">
+                  <span>Question {currentQ + 1}</span>/{questions.length}
+                </div>
+                <div className="text-white text-lg">
+                  {questions[currentQ].questionText}
+                </div>
+              </div>
+              <div className="answer-section">
+                {questions[currentQ].answerOptions.map((answerOption) => (
+                  <button
+                    className="bg-white p-5 rounded-lg m-5 w-full hover:grey flex hover:bg-[#56487b] hover:text-white"
+                    onClick={() => answerHandler(answerOption.isCorrect)}
+                  >
+                    {answerOption.answerText}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
