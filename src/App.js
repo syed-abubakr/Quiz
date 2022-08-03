@@ -12,9 +12,12 @@ function App() {
     password: "1234",
   };
 
+  const categories = ["Geography", "History", "General Knowledge"];
+
   const [user, setUser] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [startState, setStartState] = useState(false);
+  const [topic, setTopic] = useState(-1);
 
   const Login = (details) => {
     console.log(details);
@@ -33,40 +36,54 @@ function App() {
 
   const Logout = () => {
     console.log("Logout");
+    setUser({
+      email: "",
+      password: "",
+    });
   };
 
-  if (user.email === "") {
-    return <Signin Login={Login} error={error} />;
+  const listItems = categories.map((myList, i) => (
+    <div className="grid place-items-center mt-1">
+      <button
+        className="bg-slate-500 hover:bg-slate-600 mt-1 rounded-lg w-1/2 text-xl p-3 text-white hover:bg-slate-600"
+        onClick={() => {
+          setTopic(i);
+        }}
+      >
+        <li>{myList}</li>
+      </button>
+    </div>
+  ));
+
+  // if (user.email === "") {
+  //   return <Signin Login={Login} error={error} />;
+  // } else {
+  if (topic != -1) {
+    console.log(startState);
+    return (
+      <>
+        {/* <Header /> */}
+        <Quiz topic={topic} setTopic={setTopic} />
+      </>
+    );
   } else {
-    if (startState) {
-      console.log(startState);
-      return (
-        <>
-          {/* <Header /> */}
-          <Quiz />
-        </>
-      );
-    } else {
-      console.log("hello");
-      return (
-        <>
-          {/* <Header /> */}
-          <div className="grid place-items-center mt-5">
-            <h1 className="text-3xl">Welcome to your dashboard</h1>
-            <p>press Start to begin quiz</p>
-            <button
-              className="bg-slate-500 rounded-lg p-1 text-white w-[100px] mt-5 hover:bg-slate-600"
-              onClick={() => {
-                setStartState(true);
-              }}
-            >
-              Start
-            </button>
-          </div>
-        </>
-      );
-    }
+    console.log("hello");
+    return (
+      <>
+        <Header Logout={Logout} />
+        <div className="grid place-items-center mt-5">
+          <h1 className="text-3xl mt-5">Welcome to your dashboard</h1>
+          <p className="text-lg mb-2">Choose a category to start the Quiz</p>
+        </div>
+        <div>
+          <ul>
+            {listItems}
+          </ul>
+        </div>
+      </>
+    );
   }
 }
+// }
 
 export default App;
