@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 
-export default function Quiz({ topic, setTopic }) {
+export default function Quiz({ topic, home }) {
   const questions = [
     [
       {
@@ -192,6 +192,101 @@ export default function Quiz({ topic, setTopic }) {
         ],
       },
     ],
+
+    [
+      {
+        questionText: "Who is the founder of Wikipedia?",
+        answerOptions: [
+          { answerText: "Bill Gates", isCorrect: false },
+          { answerText: "Jeff Bezos", isCorrect:false },
+          { answerText: "Jimmy Wales", isCorrect: true },
+          { answerText: "Elon Musk", isCorrect: false },
+        ],
+      },
+      {
+        questionText:
+          "Airbaltic is a Airline of which country?",
+        answerOptions: [
+          { answerText: "Pakistan", isCorrect: false },
+          { answerText: "Latvia", isCorrect: true },
+          { answerText: "USA", isCorrect: false },
+          { answerText: "India", isCorrect: false },
+        ],
+      },
+      {
+        questionText: "Which was the old name of Istanbul?",
+        answerOptions: [
+          { answerText: "Constantinople", isCorrect: true },
+          { answerText: "Kristiania", isCorrect: false },
+          { answerText: "Alexandria", isCorrect: false },
+          { answerText: "Attalia", isCorrect: false },
+        ],
+      },
+      {
+        questionText: "When did Rawanda join commonweath?",
+        answerOptions: [
+          { answerText: "2009", isCorrect: true },
+          { answerText: "2019", isCorrect: false },
+          { answerText: "2020", isCorrect: false },
+          { answerText: "2000", isCorrect: false },
+        ],
+      },
+      {
+        questionText: "Which of the following is not the member of Schengen Area?",
+        answerOptions: [
+          { answerText: "UK", isCorrect: true },
+          { answerText: "Spain", isCorrect: false },
+          { answerText: "France", isCorrect: false },
+          { answerText: "Germany", isCorrect: false },
+        ],
+      },
+      {
+        questionText: "How many Muslim countries are currently member of Group of Twenty (G20)?",
+        answerOptions: [
+          { answerText: "1", isCorrect: false },
+          { answerText: "3", isCorrect: true },
+          { answerText: "2", isCorrect: false },
+          { answerText: "0", isCorrect: false },
+        ],
+      },
+      {
+        questionText: "Which country has most official languages in the world?",
+        answerOptions: [
+          { answerText: "South Africa", isCorrect: false },
+          { answerText: "Japan", isCorrect: false },
+          { answerText: "Zimbabwe", isCorrect: true },
+          { answerText: "Papua New Guinea", isCorrect: false },
+        ],
+      },
+      {
+        questionText: "Which of the following multinational companies is not Japanese?",
+        answerOptions: [
+          { answerText: "Panasonic", isCorrect: false },
+          { answerText: "Sony", isCorrect: false },
+          { answerText: "Hitachi", isCorrect: false },
+          { answerText: "LG", isCorrect: true },
+        ],
+      },
+      {
+        questionText: "Which is the largest port on Red Sea?",
+        answerOptions: [
+          { answerText: "Jeddah", isCorrect: true },
+          { answerText: "Alexandria", isCorrect: false },
+          { answerText: "Port Sudan", isCorrect: false },
+          { answerText: "Sharm-al-Sheikh", isCorrect: false },
+        ],
+      },
+      {
+        questionText: "Which country has the largest reserves of Oil??",
+        answerOptions: [
+          { answerText: "USA", isCorrect: false },
+          { answerText: "Venezuela", isCorrect: true },
+          { answerText: "Russia", isCorrect: false },
+          { answerText: "Iran", isCorrect: false },
+        ],
+      },
+    ],
+
   ];
 
   const [currentQ, setCurrentQ] = useState(0);
@@ -272,7 +367,7 @@ export default function Quiz({ topic, setTopic }) {
       <button
         className="sticky left-0 bottom-0 bg-slate-500 hover:bg-slate-600 rounded-lg p-1"
         onClick={() => {
-          if(window.confirm("Are you sure?\nAny unsaved progress will be lost")){setTopic(-1);}
+          if(window.confirm("Are you sure?\nAny unsaved progress will be lost")){home();}
         }}
       >
         Return to Dashboard
