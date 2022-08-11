@@ -198,14 +198,13 @@ export default function Quiz({ topic, home }) {
         questionText: "Who is the founder of Wikipedia?",
         answerOptions: [
           { answerText: "Bill Gates", isCorrect: false },
-          { answerText: "Jeff Bezos", isCorrect:false },
+          { answerText: "Jeff Bezos", isCorrect: false },
           { answerText: "Jimmy Wales", isCorrect: true },
           { answerText: "Elon Musk", isCorrect: false },
         ],
       },
       {
-        questionText:
-          "Airbaltic is a Airline of which country?",
+        questionText: "Airbaltic is a Airline of which country?",
         answerOptions: [
           { answerText: "Pakistan", isCorrect: false },
           { answerText: "Latvia", isCorrect: true },
@@ -232,7 +231,8 @@ export default function Quiz({ topic, home }) {
         ],
       },
       {
-        questionText: "Which of the following is not the member of Schengen Area?",
+        questionText:
+          "Which of the following is not the member of Schengen Area?",
         answerOptions: [
           { answerText: "UK", isCorrect: true },
           { answerText: "Spain", isCorrect: false },
@@ -241,7 +241,8 @@ export default function Quiz({ topic, home }) {
         ],
       },
       {
-        questionText: "How many Muslim countries are currently member of Group of Twenty (G20)?",
+        questionText:
+          "How many Muslim countries are currently member of Group of Twenty (G20)?",
         answerOptions: [
           { answerText: "1", isCorrect: false },
           { answerText: "3", isCorrect: true },
@@ -259,7 +260,8 @@ export default function Quiz({ topic, home }) {
         ],
       },
       {
-        questionText: "Which of the following multinational companies is not Japanese?",
+        questionText:
+          "Which of the following multinational companies is not Japanese?",
         answerOptions: [
           { answerText: "Panasonic", isCorrect: false },
           { answerText: "Sony", isCorrect: false },
@@ -286,7 +288,6 @@ export default function Quiz({ topic, home }) {
         ],
       },
     ],
-
   ];
 
   const [currentQ, setCurrentQ] = useState(0);
@@ -324,14 +325,14 @@ export default function Quiz({ topic, home }) {
   return (
     <>
       <div className="grid h-screen place-items-center">
-        <div className="bg-[#283153] w-1/2 p-10 rounded-lg min-h-1/2">
+        <div className="bg-primary w-1/2 p-10 rounded-lg min-h-1/2">
           {showScore ? (
             <div className="score-section text-white">
               You scored {score} out of {questions[topic].length}
             </div>
           ) : (
             <>
-              <div className="text-md bg-slate-600 w-[200px] rounded-lg p-5px h-20 grid place-items-center text-white text-center absolute top-0 right-0 m-1">
+              <div className="text-md bg-gray-900 w-[150px] rounded-lg p-5px h-20 grid place-items-center text-white text-center absolute top-0 left-0">
                 <h1>
                   Time remaining:
                   <br />
@@ -365,9 +366,17 @@ export default function Quiz({ topic, home }) {
         </div>
       </div>
       <button
-        className="sticky left-0 bottom-0 bg-slate-500 hover:bg-slate-600 rounded-lg p-1"
+        className="sticky left-0 bottom-0 bg-gray-900 hover:bg-black p-1 text-white"
         onClick={() => {
-          if(window.confirm("Are you sure?\nAny unsaved progress will be lost")){home();}
+          if (!showScore) {
+            if (
+              window.confirm("Are you sure?\nAny unsaved progress will be lost")
+            ) {
+              home();
+            }
+          } else {
+            home();
+          }
         }}
       >
         Return to Dashboard

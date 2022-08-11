@@ -18,17 +18,18 @@ export default function Sidebar({ Logout, setAbout, home }) {
           >
             <FiMenu size="40" />
           </button>
-          <div className="absolute top-full left-0 w-[150px] z-10 bg-slate-500 rounded-xl p-2 mt-1">
+          <div className="absolute top-full left-0 w-[150px] z-10 bg-slate-500 rounded-md p-2 mt-1">
             <ul>
               <li>
                 <button
                   title="Home"
-                  className="w-full grid place-items-center my-1"
+                  className="w-full grid place-items-center my-1 flex"
                   onClick={() => {
                     home();
                   }}
                 >
                   <FiHome size="25" />
+                  Home
                 </button>
               </li>
               <li>
@@ -40,6 +41,7 @@ export default function Sidebar({ Logout, setAbout, home }) {
                   }}
                 >
                   <FiInfo size="25" />
+                  About us
                 </button>
               </li>
             </ul>
